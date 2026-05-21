@@ -10,7 +10,7 @@ dotenv.config();
 // Connect to Database
 connectDB();
 
-const app = express();
+const app = express(); 
 
 // Middlewares
 app.use(cors());
