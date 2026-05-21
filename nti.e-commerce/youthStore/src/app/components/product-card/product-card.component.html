@@ -5,7 +5,8 @@
 >
   <div class="position-relative overflow-hidden">
     <img
-      [src]="product.img"
+      [src]="productImageSrc"
+      (error)="onImageError($event)"
       class="card-img-top img-grid-large"
       [alt]="product.title || 'Product image'"
       title="Product image"
@@ -51,7 +52,8 @@
 >
   <div class="position-relative overflow-hidden">
     <img
-      [src]="product.img"
+      [src]="productImageSrc"
+      (error)="onImageError($event)"
       class="card-img-top img-compact-small"
       [alt]="product.title || 'Product image'"
       title="Product image"

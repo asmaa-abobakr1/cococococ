@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
+const fs = require('fs');
 const connectDB = require('./config/db.config');
 const AppError = require('./utilites/appError.uti');
 const globalErrorHandler = require('./middlewares/errorHandlar.middleware');
@@ -11,11 +13,13 @@ dotenv.config();
 connectDB();
 
 const app = express(); 
+const uploadsPath = path.join(__dirname, 'uploads');
+fs.mkdirSync(uploadsPath, { recursive: true });
 
 // Middlewares
 app.use(cors());
 app.use(express.json());
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static(uploadsPath));
 
 // Routes
 app.use('/api/v1/auth', require('./routes/auth.route'));

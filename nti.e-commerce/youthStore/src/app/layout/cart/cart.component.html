@@ -20,7 +20,7 @@
               <tr *ngFor="let item of validItems$ | async">
                 <td class="ps-4 py-4">
                   <div class="d-flex align-items-center gap-3">
-                    <img [src]="item.product.img" class="rounded-4" width="80" height="80" style="object-fit: cover;">
+                    <img [src]="item.product.img || fallbackImage" (error)="onImageError($event)" class="rounded-4" width="80" height="80" style="object-fit: cover;">
                     <div>
                       <h6 class="fw-bold mb-0">{{item.product.title}}</h6>
                       <small class="text-gray">{{item.product.category?.title}}</small>
@@ -67,7 +67,7 @@
               <tr *ngFor="let item of changedItems$ | async">
                 <td class="ps-4 py-4">
                   <div class="d-flex align-items-center gap-3">
-                    <img [src]="item.product.img" class="rounded-4" width="80" height="80" style="object-fit: cover;">
+                    <img [src]="item.product.img || fallbackImage" (error)="onImageError($event)" class="rounded-4" width="80" height="80" style="object-fit: cover;">
                     <div>
                       <h6 class="fw-bold mb-0">{{item.product.title}}</h6>
                       <small class="text-gray text-decoration-line-through">Old Price: ${{item.price}}</small><br>

@@ -14,6 +14,18 @@ export class ProductCardComponent {
   @Input() product!: Product;
   @Input() layout: 'grid' | 'compact' = 'grid'; // grid or compact
   @Output() addToCart = new EventEmitter<Product>();
+  readonly fallbackImage = '/product-placeholder.svg';
+
+  get productImageSrc(): string {
+    return this.product?.img || this.fallbackImage;
+  }
+
+  onImageError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    if (!img.src.endsWith(this.fallbackImage)) {
+      img.src = this.fallbackImage;
+    }
+  }
 
   onAddToCart() {
     this.addToCart.emit(this.product);

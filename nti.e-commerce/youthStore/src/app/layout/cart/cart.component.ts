@@ -16,6 +16,7 @@ import { AuthService } from '../../core/service/auth-service';
 export class CartComponent {
   cartService = inject(CartService);
   authService = inject(AuthService);
+  readonly fallbackImage = '/product-placeholder.svg';
 
   validItems$: Observable<any[]> = this.cartService.cart$.pipe(
     map(cart => cart.filter(item => !item.isPriceChanged))
@@ -32,5 +33,12 @@ export class CartComponent {
 
   acceptNewPrice(productId: string, newPrice: number) {
     this.cartService.acceptNewPrice(productId, newPrice);
+  }
+
+  onImageError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    if (!img.src.endsWith(this.fallbackImage)) {
+      img.src = this.fallbackImage;
+    }
   }
 }

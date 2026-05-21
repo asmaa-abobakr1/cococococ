@@ -26,6 +26,7 @@ export class CheckoutComponent implements OnInit {
   newAddress = { alias: '', details: '', phone: '' };
   showAddressForm = false;
   error: string = '';
+  readonly fallbackImage = '/product-placeholder.svg';
 
   total$: Observable<number> = this.cartService.cart$.pipe(
     map(cart => cart.reduce((acc, item) => acc + (item.price * item.count), 0))
@@ -76,5 +77,12 @@ export class CheckoutComponent implements OnInit {
       this.showAddressForm = false;
       this.newAddress = { alias: '', details: '', phone: '' };
     });
+  }
+
+  onImageError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    if (!img.src.endsWith(this.fallbackImage)) {
+      img.src = this.fallbackImage;
+    }
   }
 }

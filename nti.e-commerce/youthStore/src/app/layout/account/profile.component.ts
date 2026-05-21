@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
   showAddressForm = false;
   userData: any = { name: '', email: '' };
   isEditingProfile = false;
+  readonly fallbackImage = '/product-placeholder.svg';
 
   ngOnInit() {
     this.loadOrders();
@@ -89,6 +90,13 @@ export class ProfileComponent implements OnInit {
       case 'cancelbyuser':
       case 'canceledbyadmin': return 'bg-danger text-white';
       default: return 'bg-secondary text-white';
+    }
+  }
+
+  onImageError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    if (!img.src.endsWith(this.fallbackImage)) {
+      img.src = this.fallbackImage;
     }
   }
 }

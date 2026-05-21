@@ -46,7 +46,7 @@ import { Product, Order } from '../../models/interfaces';
           </div>
           <div class="list-group list-group-flush">
             <div class="list-group-item px-0 border-0 d-flex align-items-center gap-3" *ngFor="let p of bestSellersList">
-              <img [src]="p.img" width="40" height="40" class="rounded-3" style="object-fit: cover;">
+              <img [src]="p.img || fallbackImage" (error)="onImageError($event)" width="40" height="40" class="rounded-3" style="object-fit: cover;">
               <span class="small fw-bold">{{p.title}}</span>
             </div>
           </div>
@@ -61,7 +61,7 @@ import { Product, Order } from '../../models/interfaces';
           </div>
           <div class="list-group list-group-flush">
             <div class="list-group-item px-0 border-0 d-flex align-items-center gap-3" *ngFor="let p of newArrivalsList">
-              <img [src]="p.img" width="40" height="40" class="rounded-3" style="object-fit: cover;">
+              <img [src]="p.img || fallbackImage" (error)="onImageError($event)" width="40" height="40" class="rounded-3" style="object-fit: cover;">
               <span class="small fw-bold">{{p.title}}</span>
             </div>
           </div>
@@ -82,6 +82,14 @@ export class DashboardHomeComponent implements OnInit {
   totalSales = 0;
   activeOrders = 0;
   totalProducts = 0;
+  readonly fallbackImage = '/product-placeholder.svg';
+
+  onImageError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    if (!img.src.endsWith(this.fallbackImage)) {
+      img.src = this.fallbackImage;
+    }
+  }
 
   ngOnInit() {
     this.orderService.getAllOrders().subscribe(res => {

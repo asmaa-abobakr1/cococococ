@@ -45,7 +45,7 @@ interface ProductForm {
           <tr *ngFor="let prod of products">
             <td>
               <div class="d-flex align-items-center gap-3">
-                <img [src]="prod.img" width="40" height="40" class="rounded-3" style="object-fit: cover;">
+                <img [src]="prod.img || fallbackImage" (error)="onImageError($event)" width="40" height="40" class="rounded-3" style="object-fit: cover;">
                 <span class="fw-bold small">{{prod.title}}</span>
               </div>
             </td>
@@ -154,6 +154,7 @@ export class ProductManagementComponent implements OnInit {
   products: Product[] = [];
   categories: Category[] = [];
   subCategories: SubCategory[] = [];
+  readonly fallbackImage = '/product-placeholder.svg';
   
   showForm = false;
   editingId: string | null = null;
@@ -225,6 +226,13 @@ export class ProductManagementComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
+    }
+  }
+
+  onImageError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    if (!img.src.endsWith(this.fallbackImage)) {
+      img.src = this.fallbackImage;
     }
   }
 
