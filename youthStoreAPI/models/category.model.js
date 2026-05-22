@@ -17,7 +17,7 @@ const categorySchema = new mongoose.Schema({
   },
 }, { timestamps: true });
 
-// Query middleware to filter out deleted categories
+
 categorySchema.pre(/^find/, function() {
   this.find({ isDeleted: { $ne: true } });
 });

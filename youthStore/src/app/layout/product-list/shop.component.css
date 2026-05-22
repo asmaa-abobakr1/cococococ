@@ -1,6 +1,4 @@
-/* ======================================================
-   SHOP BANNER
-====================================================== */
+
 .shop-banner {
   position: relative;
   background: linear-gradient(135deg, #1e1b4b 0%, #312e81 55%, #4c1d95 100%);
@@ -57,9 +55,7 @@
   margin: 0;
 }
 
-/* ======================================================
-   FILTER BAR
-====================================================== */
+
 .filter-bar-wrap {
   background: #fff;
   border-bottom: 1px solid #f1f5f9;
@@ -83,7 +79,7 @@
 
 .filter-bar::-webkit-scrollbar { height: 0; }
 
-/* Each filter item */
+
 .fbar-item {
   display: flex;
   align-items: center;
@@ -108,7 +104,7 @@
   flex-shrink: 0;
 }
 
-/* Search */
+
 .fbar-search { flex: 1; min-width: 180px; }
 
 .fbar-input {
@@ -123,7 +119,7 @@
 }
 .fbar-input::placeholder { color: #b0bec5; }
 
-/* Select */
+
 .fbar-select {
   background: none;
   border: none;
@@ -142,7 +138,7 @@
   background-position: right 0 center;
 }
 
-/* Price */
+
 .fbar-price { gap: 0.6rem; min-width: 180px; }
 
 .fbar-price-label {
@@ -160,10 +156,10 @@
   cursor: pointer;
 }
 
-/* Sort */
+
 .fbar-sort { flex-shrink: 0; }
 
-/* Reset button */
+
 .fbar-reset {
   background: none;
   border: 1.5px solid #fee2e2;
@@ -186,16 +182,14 @@
   transform: scale(1.05);
 }
 
-/* ======================================================
-   SHOP CONTENT
-====================================================== */
+
 .shop-content {
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
 
-/* Toolbar row */
+
 .shop-toolbar {
   display: flex;
   align-items: center;
@@ -218,7 +212,7 @@
 }
 .items-count strong { color: var(--dark); }
 
-/* Active filter chips */
+
 .chip {
   display: inline-flex;
   align-items: center;
@@ -246,9 +240,7 @@
 }
 .chip-close:hover { opacity: 1; }
 
-/* ======================================================
-   PRODUCT GRID
-====================================================== */
+
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
@@ -260,9 +252,7 @@
 }
 .product-cell:hover { transform: translateY(-5px); }
 
-/* ======================================================
-   EMPTY STATE
-====================================================== */
+
 .empty-state {
   text-align: center;
   padding: 6rem 2rem;
@@ -312,9 +302,7 @@
   box-shadow: 0 8px 20px rgba(99,102,241,0.3);
 }
 
-/* ======================================================
-   RESPONSIVE
-====================================================== */
+
 @media (max-width: 768px) {
   .filter-bar-wrap { padding: 0 1rem; }
   .shop-content { padding: 1.5rem 1rem; }

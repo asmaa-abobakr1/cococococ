@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/', testimonialController.submitTestimonial);
 router.get('/approved', testimonialController.getApprovedTestimonials);
 
-// Admin only
+
 router.get('/', authMiddleware.protect, authMiddleware.restrictTo('admin'), testimonialController.getAllTestimonials);
 router.patch('/:id/status', authMiddleware.protect, authMiddleware.restrictTo('admin'), testimonialController.updateStatus);
 router.delete('/:id', authMiddleware.protect, authMiddleware.restrictTo('admin'), testimonialController.deleteTestimonial);

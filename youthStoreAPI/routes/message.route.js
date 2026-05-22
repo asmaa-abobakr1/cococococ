@@ -4,10 +4,10 @@ const authMiddleware = require('../middelwares/auth.middelware');
 
 const router = express.Router();
 
-// Public route for sending messages
+
 router.post('/', messageController.createMessage);
 
-// Admin only routes
+
 router.use(authMiddleware.protect);
 router.use(authMiddleware.restrictTo('admin'));
 

@@ -18,7 +18,7 @@ const testimonialSchema = new mongoose.Schema({
   },
   isApproved: {
     type: Number,
-    enum: [1, 2, 3], // 1: Approved, 2: Pending, 3: Refused
+    enum: [1, 2, 3], 
     default: 2,
   },
   user: {

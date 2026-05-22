@@ -1,4 +1,4 @@
-/* =================== NAVBAR =================== */
+
 .navbar {
   transition: all 0.3s ease;
   z-index: 1040;
@@ -63,7 +63,7 @@
   transform: scale(1.1);
 }
 
-/* =================== HAMBURGER BUTTON =================== */
+
 .sidebar-toggle-btn {
   display: flex;
   flex-direction: column;
@@ -92,7 +92,7 @@
   transition: all 0.3s ease;
 }
 
-/* =================== OVERLAY =================== */
+
 .sidebar-overlay {
   position: fixed;
   inset: 0;
@@ -108,7 +108,7 @@
   backdrop-filter: blur(2px);
 }
 
-/* =================== SIDEBAR DRAWER =================== */
+
 .categories-sidebar {
   position: fixed;
   top: 0;
@@ -128,7 +128,7 @@
   transform: translateX(0);
 }
 
-/* --- Sidebar Header --- */
+
 .sidebar-header {
   display: flex;
   align-items: center;
@@ -166,7 +166,7 @@
   background: rgba(255, 255, 255, 0.35);
 }
 
-/* --- Sidebar Body --- */
+
 .sidebar-body {
   flex: 1;
   overflow-y: auto;
@@ -181,7 +181,7 @@
   border-radius: 4px;
 }
 
-/* --- All Products Link --- */
+
 .sidebar-all-link {
   display: flex;
   align-items: center;
@@ -205,7 +205,7 @@
   margin: 0.75rem 1.5rem;
 }
 
-/* --- Category List --- */
+
 .category-list {
   padding: 0 0.75rem;
   display: flex;
@@ -218,7 +218,7 @@
   overflow: hidden;
 }
 
-/* --- Category Main Link --- */
+
 .category-main-link {
   display: flex;
   align-items: center;
@@ -261,7 +261,7 @@
   font-size: 0.95rem;
 }
 
-/* --- Sub-toggle Button --- */
+
 .sub-toggle-btn {
   background: none;
   border: none;
@@ -289,7 +289,7 @@
   transform: rotate(180deg);
 }
 
-/* --- SubCategory List --- */
+
 .sub-category-list {
   max-height: 0;
   overflow: hidden;
@@ -332,7 +332,7 @@
   background: var(--primary);
 }
 
-/* --- Sidebar Footer --- */
+
 .sidebar-footer {
   padding: 1rem 1.5rem;
   border-top: 1px solid #f1f5f9;

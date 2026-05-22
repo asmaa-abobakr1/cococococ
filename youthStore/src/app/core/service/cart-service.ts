@@ -27,7 +27,7 @@ export class CartService {
       if (user) {
         this.fetchUserCart();
       } else {
-        this.loadCart(); // Load from local storage for guests
+        this.loadCart(); 
       }
     });
   }

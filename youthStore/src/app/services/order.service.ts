@@ -25,7 +25,10 @@ export class OrderService {
     return this.http.patch(`${this.apiUrl}/${id}/refund-request`, {});
   }
 
-  // Admin
+  getOrderById(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`);
+  }
+
   getAllOrders(): Observable<any> {
     return this.http.get(this.apiUrl);
   }

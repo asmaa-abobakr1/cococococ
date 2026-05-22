@@ -1,4 +1,4 @@
-<!-- Hero Section -->
+
 <section class="hero-section position-relative overflow-hidden py-5 d-flex align-items-center" style="min-height: 80vh; background: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.05) 90%);">
   <div class="mesh-gradient"></div>
   <div class="container position-relative">
@@ -44,13 +44,13 @@
   </div>
 </section>
 
-<!-- Marketing Slider -->
+
 <app-marketing-slider 
   *ngIf="settings?.marketingImages?.length" 
   [images]="settings!.marketingImages">
 </app-marketing-slider>
 
-<!-- New Arrivals -->
+
 <section class="py-5 bg-white">
   <div class="container">
     <div class="d-flex justify-content-between align-items-end mb-5">
@@ -76,7 +76,7 @@
   </div>
 </section>
 
-<!-- Best Sellers -->
+
 <section class="py-5 bg-light position-relative overflow-hidden">
   <div class="mesh-gradient opacity-05"></div>
   <div class="container position-relative">
@@ -100,7 +100,7 @@
   </div>
 </section>
 
-<!-- Testimonials Slider -->
+
 <section class="py-5 bg-white overflow-hidden">
   <div class="container">
     <div class="text-center mb-5">
@@ -115,7 +115,7 @@
       [testimonials]="testimonials"
     ></app-testimonial-slider>
 
-    <!-- Write Review Form -->
+    
     <div class="row justify-content-center mt-5" *ngIf="authService.isLoggedIn() && !authService.isAdmin()">
       <div class="col-md-8 col-lg-6">
         <div class="card glass-morphism border-0 shadow-sm rounded-5 p-4">

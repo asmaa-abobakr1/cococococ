@@ -18,7 +18,7 @@ export class TestimonialService {
     return this.http.get<ApiResponse<{ testimonials: Testimonial[] }>>(`${this.apiUrl}/approved`);
   }
 
-  // Admin
+  
   getAll(): Observable<ApiResponse<{ testimonials: Testimonial[] }>> {
     return this.http.get<ApiResponse<{ testimonials: Testimonial[] }>>(this.apiUrl);
   }

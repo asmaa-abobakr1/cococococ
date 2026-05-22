@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg glass-morphism sticky-top py-3">
   <div class="container">
     
-    <!-- Category Sidebar Toggle (3 lines) -->
+    
     <button class="sidebar-toggle-btn me-3" (click)="toggleSidebar()" aria-label="Open categories menu" id="sidebarToggleBtn">
       <span class="hamburger-line"></span>
       <span class="hamburger-line"></span>
@@ -64,10 +64,10 @@
   </div>
 </nav>
 
-<!-- Sidebar Overlay -->
+
 <div class="sidebar-overlay" [class.active]="sidebarOpen" (click)="closeSidebar()"></div>
 
-<!-- Categories Sidebar Drawer -->
+
 <aside class="categories-sidebar" [class.open]="sidebarOpen" id="categoriesSidebar">
   <div class="sidebar-header">
     <div class="sidebar-brand">
@@ -80,7 +80,7 @@
   </div>
 
   <div class="sidebar-body">
-    <!-- All Products Link -->
+    
     <a class="sidebar-all-link" routerLink="/shop" (click)="closeSidebar()">
       <i class="fas fa-store me-3"></i>
       <span>All Products</span>
@@ -89,10 +89,10 @@
 
     <div class="sidebar-divider"></div>
 
-    <!-- Category List -->
+    
     <div class="category-list">
       <div class="category-item" *ngFor="let cat of categories">
-        <!-- Category Row -->
+        
         <a class="category-main-link"
            [routerLink]="['/shop']" 
            [queryParams]="{category: cat._id}"
@@ -109,7 +109,7 @@
           </button>
         </a>
 
-        <!-- SubCategory List (expandable) -->
+        
         <div class="sub-category-list" [class.expanded]="expandedCat === cat._id" *ngIf="getSubsForCat(cat._id).length">
           <a class="sub-category-link"
              *ngFor="let sub of getSubsForCat(cat._id)"

@@ -12,7 +12,7 @@ import { Product } from '../../models/interfaces';
 })
 export class ProductCardComponent {
   @Input() product!: Product;
-  @Input() layout: 'grid' | 'compact' = 'grid'; // grid or compact
+  @Input() layout: 'grid' | 'compact' = 'grid'; 
   @Output() addToCart = new EventEmitter<Product>();
 
   onAddToCart() {

@@ -113,7 +113,7 @@ export class TestimonialsComponent implements OnInit {
   submitReview() {
     if (!this.newReview.content) return;
     
-    // Set name from logged in user if available
+    
     const user = this.authService.getUser();
     if (user && 'name' in user) {
       this.newReview.name = user.name;

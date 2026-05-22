@@ -1,4 +1,4 @@
-<!-- Grid Layout (Large) -->
+
 <div
   *ngIf="layout === 'grid'"
   class="card product-card h-100 border-0 shadow-sm rounded-4 overflow-hidden transition-all hover-lift"
@@ -10,7 +10,7 @@
       [alt]="product.title || 'Product image'"
       title="Product image"
     />
-    <!-- Stock Badge -->
+    
     <span
       class="badge position-absolute top-0 end-0 m-3 shadow-sm"
       [ngClass]="{
@@ -44,7 +44,7 @@
   </div>
 </div>
 
-<!-- Compact Layout (Small) -->
+
 <div
   *ngIf="layout === 'compact'"
   class="card product-card h-100 border-0 shadow-sm rounded-4 overflow-hidden transition-all hover-lift"

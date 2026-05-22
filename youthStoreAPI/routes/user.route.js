@@ -14,7 +14,7 @@ router.post('/address', userController.addAddress);
 router.patch('/address/:id/default', userController.setDefaultAddress);
 router.delete('/address/:id', userController.deleteAddress);
 
-// Admin only
+
 router.use(authMiddleware.restrictTo('admin'));
 router.get('/', userController.getAllUsers);
 router.post('/', userController.createUser);

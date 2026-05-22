@@ -7,17 +7,17 @@ const globalErrorHandler = require('./middelwares/errorHandlar.middleware');
 
 dotenv.config();
 
-// Connect to Database
+
 connectDB();
 
 const app = express();
 
-// Middlewares
+
 app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
-// Routes
+
 app.use('/api/v1/auth', require('./routes/auth.route'));
 app.use('/api/v1/users', require('./routes/user.route'));
 app.use('/api/v1/products', require('./routes/product.route'));
@@ -31,12 +31,12 @@ app.use('/api/v1/messages', require('./routes/ads.route'));
 app.use('/api/v1/ads', require('./routes/ads.route'));
 app.use('/api/v1/carts', require('./routes/cart.route'));
 
-// 404 handler
+
 app.use((req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
-// Global Error Handler
+
 app.use(globalErrorHandler);
 
 const PORT = process.env.PORT || 5000;

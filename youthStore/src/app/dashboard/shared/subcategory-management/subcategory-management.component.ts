@@ -84,7 +84,7 @@ export class SubCategoryManagementComponent implements OnInit {
 
   load() {
     this.productService.getSubCategories().subscribe(res => {
-       // Backend renamed to subcategories in interface
+       
        this.subCategories = (res.data as any).subcategories || (res.data as any).subCategories;
     });
   }

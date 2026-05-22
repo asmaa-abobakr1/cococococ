@@ -8,7 +8,7 @@ dotenv.config();
 mongoose.connect(process.env.MONGO_URI).then(async () => {
   console.log('DB connected for seeding');
   
-  // Clear existing
+  
   await Category.deleteMany();
   await Product.deleteMany();
 
@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGO_URI).then(async () => {
   const products = [
     { title: 'Oversized Blue Hoodie', price: 1200, desc: 'Premium cotton oversized hoodie', img: 'https://picsum.photos/400/500?random=10', stock: 10, category: cat1._id, gender: 'unisex' },
     { title: 'Graphic White Tee', price: 600, desc: 'Streetwear graphic t-shirt', img: 'https://picsum.photos/400/500?random=11', stock: 5, category: cat2._id, gender: 'boys' },
-    { title: 'Premium Denim Jeans', price: 20000, desc: 'Exclusive high-end denim collection', img: 'https://picsum.photos/400/500?random=12', stock: 1, category: cat3._id, gender: 'girls' }, // 3rd product 20,000
+    { title: 'Premium Denim Jeans', price: 20000, desc: 'Exclusive high-end denim collection', img: 'https://picsum.photos/400/500?random=12', stock: 1, category: cat3._id, gender: 'girls' }, 
     { title: 'Streetwear Cargo Pants', price: 1500, desc: 'Utility cargo pants for urban style', img: 'https://picsum.photos/400/500?random=13', stock: 2, category: cat3._id, gender: 'boys' },
     { title: 'Pastel Pink Sweatshirt', price: 1100, desc: 'Soft pastel sweatshirt for winter', img: 'https://picsum.photos/400/500?random=14', stock: 8, category: cat1._id, gender: 'girls' }
   ];

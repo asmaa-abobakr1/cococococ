@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', subCategoryController.getAllSubCategories);
 
-// Admin only
+
 router.use(authMiddleware.protect);
 router.use(authMiddleware.restrictTo('admin'));
 

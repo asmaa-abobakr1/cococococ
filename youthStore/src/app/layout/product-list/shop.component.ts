@@ -29,6 +29,7 @@ export class ShopComponent implements OnInit {
     name: '',
     category: '',
     subCategory: '',
+    gender: '',
     minPrice: 0,
     maxPrice: 100000,
     sort: '-createdAt'
@@ -38,6 +39,7 @@ export class ShopComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['category']) this.filters.category = params['category'];
       if (params['subCategory']) this.filters.subCategory = params['subCategory'];
+      if (params['gender']) this.filters.gender = params['gender'];
       this.loadProducts();
     });
     this.loadCategories();
@@ -52,6 +54,7 @@ export class ShopComponent implements OnInit {
     }
     if (this.filters.category) apiFilters['category'] = this.filters.category;
     if (this.filters.subCategory) apiFilters['subCategory'] = this.filters.subCategory;
+    if (this.filters.gender) apiFilters['gender'] = this.filters.gender;
     if (this.filters.minPrice > 0) apiFilters['price[gte]'] = Number(this.filters.minPrice);
     if (this.filters.maxPrice < this.maxPriceLimit) apiFilters['price[lte]'] = Number(this.filters.maxPrice);
     apiFilters['sort'] = this.filters.sort;
@@ -69,7 +72,6 @@ export class ShopComponent implements OnInit {
 
   loadSubCategories() {
     this.productService.getSubCategories().subscribe(res => {
-      // Backend renamed to subcategories in interface
       this.subCategories = (res.data as any).subcategories || (res.data as any).subCategories;
       this.updateFilteredSubCategories();
     });
@@ -100,6 +102,7 @@ export class ShopComponent implements OnInit {
       name: '',
       category: '',
       subCategory: '',
+      gender: '',
       minPrice: 0,
       maxPrice: this.maxPriceLimit,
       sort: '-createdAt'

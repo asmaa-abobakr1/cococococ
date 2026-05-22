@@ -25,7 +25,7 @@ export class UserService {
     return this.http.delete(`${this.apiUrl}/address/${id}`);
   }
 
-  // Admin methods
+  
   getAllUsers(): Observable<any> {
     return this.http.get(this.apiUrl);
   }

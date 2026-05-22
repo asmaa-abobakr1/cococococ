@@ -35,7 +35,7 @@ export class ProductService {
     return this.http.get<ApiResponse<{ subcategories: SubCategory[] }>>(this.subCatUrl);
   }
 
-  // Admin methods - Categories
+  
   createCategory(data: Partial<Category>): Observable<ApiResponse<{ category: Category }>> {
     return this.http.post<ApiResponse<{ category: Category }>>(this.catUrl, data);
   }
@@ -46,7 +46,7 @@ export class ProductService {
     return this.http.delete<ApiResponse<null>>(`${this.catUrl}/${id}`);
   }
 
-  // Admin methods - SubCategories
+  
   createSubCategory(data: Partial<SubCategory>): Observable<ApiResponse<{ subcategory: SubCategory }>> {
     return this.http.post<ApiResponse<{ subcategory: SubCategory }>>(this.subCatUrl, data);
   }
@@ -57,7 +57,7 @@ export class ProductService {
     return this.http.delete<ApiResponse<null>>(`${this.subCatUrl}/${id}`);
   }
 
-  // Admin methods - Products
+  
   createProduct(productData: FormData): Observable<ApiResponse<{ product: Product }>> {
     return this.http.post<ApiResponse<{ product: Product }>>(this.apiUrl, productData);
   }

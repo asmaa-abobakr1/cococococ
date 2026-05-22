@@ -3,17 +3,13 @@ const AppError = require('../utilites/appError.uti');
 
 exports.getAllProducts = async (req, res, next) => {
   try {
-    // 1) Filtering
     const queryObj = { ...req.query };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
     excludedFields.forEach(el => delete queryObj[el]);
 
-    // Advanced filtering
     let filterObj = {};
     Object.keys(queryObj).forEach(key => {
       let val = queryObj[key];
-      
-      // Handle price[gte]=0 or price: { gte: 0 }
       let targetKey = key;
       let operator = null;
       
@@ -42,11 +38,16 @@ exports.getAllProducts = async (req, res, next) => {
       }
     });
 
+    if (filterObj.gender === 'boys') {
+      filterObj.gender = { $in: ['boys', 'unisex'] };
+    } else if (filterObj.gender === 'girls') {
+      filterObj.gender = { $in: ['girls', 'unisex'] };
+    }
+
     console.log('Final Filter Object:', JSON.stringify(filterObj, null, 2));
 
     let query = Product.find(filterObj).populate('category subCategory');
 
-    // 2) Sorting
     if (req.query.sort) {
       const sortBy = req.query.sort.split(',').join(' ');
       query = query.sort(sortBy);
@@ -54,14 +55,12 @@ exports.getAllProducts = async (req, res, next) => {
       query = query.sort('-createdAt');
     }
 
-    // 3) Pagination
     const page = req.query.page * 1 || 1;
     const limit = req.query.limit * 1 || 100;
     const skip = (page - 1) * limit;
 
     query = query.skip(skip).limit(limit);
 
-    // 4) Execution
     const products = await query;
 
     res.status(200).json({
@@ -106,7 +105,6 @@ exports.updateProduct = async (req, res, next) => {
 
 exports.deleteProduct = async (req, res, next) => {
   try {
-    // Soft delete
     const product = await Product.findByIdAndUpdate(req.params.id, { isDeleted: true });
     if (!product) return next(new AppError('No product found with that ID', 404));
     res.status(204).json({ status: 'success', data: null });

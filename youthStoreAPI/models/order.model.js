@@ -8,7 +8,7 @@ const orderSchema = new mongoose.Schema({
   },
   products: [{
     product: { type: mongoose.Schema.ObjectId, ref: 'Product', required: true },
-    price: { type: Number, required: true }, // Snapshot price
+    price: { type: Number, required: true }, 
     count: { type: Number, default: 1 }
   }],
   totalPrice: {
@@ -16,7 +16,7 @@ const orderSchema = new mongoose.Schema({
     required: true
   },
   address: {
-    type: String, // String snapshot as requested
+    type: String, 
     required: [true, 'Order must have a shipping address'],
   },
   status: {

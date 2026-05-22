@@ -108,7 +108,7 @@ export class ReviewManagementComponent implements OnInit {
   }
 
   updateStatus(id: string, isApproved: 1 | 2 | 3) {
-    // Cast to any for the updateStatus method which expects { isApproved: boolean } (I need to fix that service too)
+    
     (this.testimonialService as any).updateStatus(id, { isApproved }).subscribe({
       next: () => {
         this.loadReviews();

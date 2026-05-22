@@ -21,7 +21,7 @@ export class CartService {
       if (user) {
         this.fetchUserCart();
       } else {
-        this.loadCart(); // Load from local storage for guests
+        this.loadCart(); 
       }
     });
   }
@@ -88,10 +88,10 @@ export class CartService {
   private updateCart(cart: CartItem[]) {
     this.cartSubject.next(cart);
     if (this.authService.isLoggedIn()) {
-      // Sync to DB
+      
       this.http.patch<ApiResponse<{ cart: CartItem[] }>>(`${this.userUrl}/updateCart`, { cart }).subscribe();
     } else {
-      // Save to local storage
+      
       localStorage.setItem('cart', JSON.stringify(cart));
     }
   }

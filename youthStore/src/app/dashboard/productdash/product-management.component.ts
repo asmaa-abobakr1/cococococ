@@ -180,7 +180,7 @@ export class ProductManagementComponent implements OnInit {
     this.load();
     this.productService.getCategories().subscribe(res => this.categories = res.data.categories);
     this.productService.getSubCategories().subscribe(res => {
-       // Backend sends 'subcategories' key (lowercase) based on my service update
+       
        this.subCategories = (res.data as any).subcategories || (res.data as any).subCategories;
     });
   }

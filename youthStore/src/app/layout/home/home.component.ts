@@ -76,9 +76,9 @@ export class HomeComponent implements OnInit {
     const reviewData: Partial<Testimonial> = { ...this.newReview };
     const user = this.authService.user$ as any;
     if (this.authService.isLoggedIn()) {
-      // In a real app, we'd get the ID from the decoded token
-      // For now, let's assume it's available or handled by the backend if we add protect middleware
-      // But since we want to allow guests, we'll just send it if we have it
+      
+      
+      
     }
 
     this.testimonialService.submit(reviewData).subscribe({

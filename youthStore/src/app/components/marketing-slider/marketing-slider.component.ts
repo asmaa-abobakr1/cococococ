@@ -46,7 +46,7 @@ export class MarketingSliderComponent implements OnInit, OnDestroy {
 
   updateItemsPerView() {
     this.itemsPerView = window.innerWidth < 768 ? 1 : 3;
-    // Reset index if it exceeds new bounds
+    
     const max = Math.max(0, this.images.length - this.itemsPerView);
     if (this.currentIndex > max) this.currentIndex = max;
   }

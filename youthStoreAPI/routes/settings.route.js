@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', settingsController.getSettings);
 
-// Admin only
+
 router.patch('/', 
   authMiddleware.protect, 
   authMiddleware.restrictTo('admin'), 

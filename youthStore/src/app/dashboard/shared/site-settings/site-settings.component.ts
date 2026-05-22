@@ -174,7 +174,7 @@ export class SiteSettingsComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedMarketingFiles.push(input.files[0]);
-      // Clear input so same file can be selected again if removed
+      
       input.value = '';
     }
   }
@@ -194,7 +194,7 @@ export class SiteSettingsComponent implements OnInit {
     this.loading = true;
     const formData = new FormData();
     
-    // Type-safe handling of settings object
+    
     const settingsObj = this.settings as any;
     Object.keys(settingsObj).forEach(key => {
       if (key === 'heroImage' || key === 'marketingImages' || key === '_id' || key === 'createdAt' || key === 'updatedAt' || key === '__v') return;
@@ -207,18 +207,18 @@ export class SiteSettingsComponent implements OnInit {
       }
     });
     
-    // Handle Hero Image
+    
     if (this.selectedHeroFile) {
       formData.append('heroImage', this.selectedHeroFile);
     } else {
       formData.append('heroImage', this.settings.heroImage);
     }
 
-    // Handle Marketing Images (Existing + New)
-    // We send existing URLs as a comma-separated string
+    
+    
     formData.append('marketingImages', this.settings.marketingImages.join(','));
     
-    // Append new files to the same field name
+    
     if (this.selectedMarketingFiles.length > 0) {
       this.selectedMarketingFiles.forEach(file => {
         formData.append('marketingImages', file);

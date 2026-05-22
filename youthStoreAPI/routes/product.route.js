@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', productController.getAllProducts);
 router.get('/:id', productController.getProduct);
 
-// Admin only
+
 router.use(authMiddleware.protect);
 router.use(authMiddleware.restrictTo('admin'));
 

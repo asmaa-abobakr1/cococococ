@@ -4,7 +4,7 @@ exports.getSettings = async (req, res, next) => {
   try {
     let settings = await Settings.findOne();
     if (!settings) {
-      settings = await Settings.create({}); // Create default if not exists
+      settings = await Settings.create({}); 
     }
     res.status(200).json({ status: 'success', data: { settings } });
   } catch (err) { next(err); }
@@ -23,7 +23,7 @@ exports.updateSettings = async (req, res, next) => {
       }
     }
 
-    // Handle marketingImages if sent as comma-separated string from FormData (fallback)
+    
     if (typeof updateData.marketingImages === 'string' && !req.files?.marketingImages) {
       updateData.marketingImages = updateData.marketingImages.split(',').map(s => s.trim()).filter(s => s !== '');
     }

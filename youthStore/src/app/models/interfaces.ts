@@ -41,7 +41,7 @@ export interface Testimonial {
   name: string;
   content: string;
   stars: number;
-  isApproved: 1 | 2 | 3; // 1: Approved, 2: Pending, 3: Refused
+  isApproved: 1 | 2 | 3; 
   isDeleted: boolean;
   createdAt: string;
   date?: string;

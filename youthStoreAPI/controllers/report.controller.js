@@ -9,7 +9,7 @@ exports.getSalesReport = async (req, res, next) => {
         $gte: new Date(startDate),
         $lte: new Date(endDate)
       },
-      status: { $nin: ['cancelbyuser', 'canceledbyadmin'] } // Only count valid orders
+      status: { $nin: ['cancelbyuser', 'canceledbyadmin'] } 
     };
 
     const stats = await Order.aggregate([

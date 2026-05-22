@@ -1,15 +1,23 @@
-import { User, Address } from './user.model';
-import { CartItem } from './cart.model';
+import { User } from './user.model';
+import { Product } from './product.model';
+
+export interface OrderProduct {
+  product: Product | any;
+  price: number;
+  count: number;
+}
 
 export interface Order {
   _id: string;
   user?: User;
-  cartItems: CartItem[];
+  products: OrderProduct[];
   totalPrice: number;
-  status: 'pending' | 'preparing' | 'shipped' | 'delivered' | 'refused' | 'cancelbyadmin';
+  address: string;
+  status: 'pending' | 'preparing' | 'shipped' | 'delivered' | 'refused' | 'cancelbyuser' | 'cancelbyadmin' | 'canceledbyadmin';
   refundStatus: 'none' | 'requested' | 'approved' | 'rejected';
-  shippingAddress: Address;
-  isPaid: boolean;
-  paidAt?: string;
+  paymentMethod?: string;
+  orderAt?: string;
+  isDeleted?: boolean;
   createdAt: string;
+  updatedAt?: string;
 }

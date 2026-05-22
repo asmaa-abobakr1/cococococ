@@ -8,7 +8,7 @@ exports.submitTestimonial = async (req, res, next) => {
   try {
     const data = { ...req.body };
     
-    // Check for user token
+    
     let token;
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
       token = req.headers.authorization.split(' ')[1];
@@ -19,7 +19,7 @@ exports.submitTestimonial = async (req, res, next) => {
         const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
         data.user = decoded.id;
       } catch (err) {
-        // Ignore invalid token for guest submission
+        
       }
     }
 
@@ -30,7 +30,7 @@ exports.submitTestimonial = async (req, res, next) => {
 
 exports.getApprovedTestimonials = async (req, res, next) => {
   try {
-    // Sorting: stars, date, name
+    
     const testimonials = await Testimonial.find({ isApproved: 1 })
       .populate('user', 'name')
       .sort('-stars -date name');

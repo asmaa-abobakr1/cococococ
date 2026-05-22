@@ -25,7 +25,7 @@ exports.getMe = async (req, res, next) => {
     console.log('User found:', !!user);
     if (!user) return next(new AppError('No user found with that ID', 404));
     
-    // Check for price changes
+    
     let isChanged = false;
     user.cart = user.cart.filter(item => {
       if (!item.product) {
@@ -52,7 +52,7 @@ exports.getMe = async (req, res, next) => {
 
 exports.updateMe = async (req, res, next) => {
   try {
-    // Filter out restricted fields like password, role
+    
     const filteredBody = { ...req.body };
     delete filteredBody.password;
     delete filteredBody.role;
@@ -71,7 +71,7 @@ exports.addAddress = async (req, res, next) => {
     const user = await User.findById(req.user.id);
     user.addresses.push(req.body);
     
-    // If it's the first address, make it default
+    
     if (user.addresses.length === 1) {
       user.addresses[0].isDefault = true;
     }
@@ -122,7 +122,7 @@ exports.deleteUser = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
-// Admin CRUD
+
 exports.getAllUsers = async (req, res, next) => {
   try {
     const users = await User.find().sort('-createdAt');

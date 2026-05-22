@@ -8,9 +8,8 @@ exports.createOrder = async (req, res, next) => {
     if (req.user.role === 'admin') {
       return next(new AppError('Admins cannot create orders', 403));
     }
-    const { products, address } = req.body; // products: [{product: id, count: n}]
+    const { products, address } = req.body;
 
-    // 1) Check stock for all products
     for (const item of products) {
       const prod = await Product.findById(item.product);
       if (!prod || prod.stock < item.count) {
@@ -18,7 +17,6 @@ exports.createOrder = async (req, res, next) => {
       }
     }
 
-    // 2) Decrement stock and calculate total
     let totalPrice = 0;
     const orderProducts = [];
     
@@ -29,13 +27,12 @@ exports.createOrder = async (req, res, next) => {
       
       orderProducts.push({
         product: prod._id,
-        price: prod.price, // Snapshot
+        price: prod.price,
         count: item.count
       });
       totalPrice += prod.price * item.count;
     }
 
-    // 3) Create Order
     const newOrder = await Order.create({
       user: req.user.id,
       products: orderProducts,
@@ -44,7 +41,6 @@ exports.createOrder = async (req, res, next) => {
       status: 'pending'
     });
 
-    // 4) Clear User Cart
     await User.findByIdAndUpdate(req.user.id, { cart: [] });
 
     res.status(201).json({ status: 'success', data: { order: newOrder } });
@@ -70,9 +66,42 @@ exports.getAllOrders = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
+exports.getOrderById = async (req, res, next) => {
+  try {
+    const order = await Order.findById(req.params.id)
+      .populate('user')
+      .populate('products.product');
+    if (!order) return next(new AppError('Order not found', 404));
+    res.status(200).json({ status: 'success', data: { order } });
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.updateOrderStatus = async (req, res, next) => {
   try {
-    const order = await Order.findByIdAndUpdate(req.params.id, { status: req.body.status }, { returnDocument: 'after' });
+    const order = await Order.findById(req.params.id);
+    if (!order) return next(new AppError('Order not found', 404));
+
+    const oldStatus = order.status;
+    const newStatus = req.body.status;
+
+    const isCanceling = ['cancelbyadmin', 'canceledbyadmin', 'refused', 'cancelbyuser'].includes(newStatus);
+    const wasAlreadyCanceled = ['cancelbyadmin', 'canceledbyadmin', 'refused', 'cancelbyuser'].includes(oldStatus);
+
+    if (isCanceling && !wasAlreadyCanceled) {
+      for (const item of order.products) {
+        await Product.findByIdAndUpdate(item.product._id || item.product, { $inc: { stock: item.count } });
+      }
+    } else if (!isCanceling && wasAlreadyCanceled) {
+      for (const item of order.products) {
+        await Product.findByIdAndUpdate(item.product._id || item.product, { $inc: { stock: -item.count } });
+      }
+    }
+
+    order.status = newStatus;
+    await order.save();
+
     res.status(200).json({ status: 'success', data: { order } });
   } catch (err) { next(err); }
 };
@@ -82,14 +111,12 @@ exports.cancelOrder = async (req, res, next) => {
     const order = await Order.findById(req.params.id);
     if (!order) return next(new AppError('Order not found', 404));
     
-    // User can cancel if pending or prepared
     if (order.status !== 'pending' && order.status !== 'preparing') {
       return next(new AppError('Order cannot be canceled at this stage', 400));
     }
 
     order.status = 'cancelbyuser';
     
-    // Restore stock
     for (const item of order.products) {
       await Product.findByIdAndUpdate(item.product, { $inc: { stock: item.count } });
     }
@@ -115,7 +142,6 @@ exports.approveRefund = async (req, res, next) => {
     const order = await Order.findById(req.params.id);
     if (req.body.approved) {
       order.refundStatus = 'approved';
-      // Restore stock
       for (const item of order.products) {
         await Product.findByIdAndUpdate(item.product, { $inc: { stock: item.count } });
       }
@@ -131,9 +157,11 @@ exports.deleteOrder = async (req, res, next) => {
   try {
     const order = await Order.findById(req.params.id);
     if (order) {
-      // Restore stock for each product in the order
-      for (const item of order.products) {
-        await Product.findByIdAndUpdate(item.product, { $inc: { stock: item.count } });
+      const wasAlreadyCanceled = ['cancelbyadmin', 'canceledbyadmin', 'refused', 'cancelbyuser'].includes(order.status);
+      if (!wasAlreadyCanceled) {
+        for (const item of order.products) {
+          await Product.findByIdAndUpdate(item.product._id || item.product, { $inc: { stock: item.count } });
+        }
       }
     }
     await Order.findByIdAndUpdate(req.params.id, { isDeleted: true });
