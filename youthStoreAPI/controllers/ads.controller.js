@@ -2,7 +2,7 @@ const Ads = require('../models/ads.model');
 const AppError = require('../utilites/appError.uti');
 
 exports.createMessage = async (req, res, next) => {
-  try {
+  try {  
     const newAd = await Ads.create(req.body);
     res.status(201).json({
       status: 'success',
